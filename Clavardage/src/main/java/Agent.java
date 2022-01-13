@@ -194,6 +194,12 @@ public class Agent {
 		mainWindow.setVisible(true);
 		
 		//Lancement de l'ecoute des messages entrants (TCP)
+		ThreadManager TCP_TM = new ThreadManager(pseudonyme, IP);
+		TCP_TM.TCP_Server();
+		
+		//Lancer une conversation avec Rayane
+		TCP_Client Client = new TCP_Client("Rayane","10.1.15.163");
+		Client.conversation();
 		
 		
 		//System.out.println("Programme termine.");
