@@ -57,7 +57,7 @@ public class TCP_Client {
 		String msg ="";
 		System.out.println("debugC1");
 
-			while (msg!="/over")
+			while (!msg.equals("/over"))
 				{
 				System.out.println("debugC2");
 				Scanner p = new Scanner(System.in);

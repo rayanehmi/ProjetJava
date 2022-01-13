@@ -201,7 +201,7 @@ public class Agent {
 		//Lancer une conversation avec Rayane
 		try {Thread.sleep(10000);}
 		catch(InterruptedException e) {e.printStackTrace();}
-		TCP_Client Client = new TCP_Client("Rayane","10.1.15.163");
+		TCP_Client Client = new TCP_Client("10.1.15.163","Rayane");
 		Client.conversation();
 		
 		

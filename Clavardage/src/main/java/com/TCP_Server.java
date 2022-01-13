@@ -42,7 +42,7 @@ public class TCP_Server implements Runnable {
         	DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
         	System.out.println("debugT2");
         	        	
-        	while(msg!="/over") 
+        	while(!msg.equals("/over")) 
         	{
         		msg=in.readLine();
         		
