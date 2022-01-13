@@ -158,7 +158,7 @@ public class Agent {
 	}
 	
 	/**
-	 * main
+	 * main.
 	 * Fonction lancee a l'execution du programme
 	 * @throws Exception 
 	 */
@@ -178,8 +178,9 @@ public class Agent {
 		
 		//Connexion a la database
 		
-		
-		//Lancement de l'interface de selection de collegue
+		//Lancement de l'interface principale
+		MainWindow mainWindow = new MainWindow(pseudonyme,listePseudos);
+		mainWindow.setVisible(true);
 		
 		//Lancement de l'ecoute des messages entrants (TCP)
 		
