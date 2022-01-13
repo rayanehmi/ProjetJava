@@ -60,31 +60,10 @@ public class ThreadManager {
      */
 	public void TCP_Server() {
 		
-		try {
-
-        	System.out.println("Is listening on " + this.IP);
-            ServerSocket mServerSocket = new ServerSocket(10000, 2, this.IP);
-            
-            int i = 1;
-            ExecutorService pool = Executors.newCachedThreadPool();
-            
-            while (i < 10) {
-            	
-                Socket clientSocket = mServerSocket.accept();
-                System.out.println("new connexion " + i);
-                
-                Runnable TCP_Server = new TCP_Server(this.pseudo, clientSocket);
-                pool.execute(TCP_Server);
-                i++;
-                
-            }
-            
-            pool.shutdown();
-            mServerSocket.close();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		Runnable threadServerTCP = new Thread_TCP(pseudo,IP);
+		Thread thread = new Thread(threadServerTCP);
+		thread.start();
+		
     }
 }
 

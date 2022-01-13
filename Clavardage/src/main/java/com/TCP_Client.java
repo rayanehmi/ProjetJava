@@ -33,7 +33,7 @@ public class TCP_Client {
 		
 		try {
 			ClientSocket = new Socket(this.IPDest,port);
-			//System.out.println("debugCConnect");
+			System.out.println("debugCConnect");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,11 +55,11 @@ public class TCP_Client {
 		//messaging.frame.setVisible(true);
 		
 		String msg ="";
-		//System.out.println("debugC1");
+		System.out.println("debugC1");
 
 			while (msg!="/over")
 				{
-				//System.out.println("debugC2");
+				System.out.println("debugC2");
 				Scanner p = new Scanner(System.in);
 				msg = p.nextLine();
 

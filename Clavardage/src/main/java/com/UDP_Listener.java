@@ -59,6 +59,8 @@ class UDP_Listener implements Runnable {
     				clientAddress, 10001);
     		
     				try {
+    					try {Thread.sleep(200);}
+    					catch(InterruptedException e) {e.printStackTrace();}
 						dgramSocket.send(outPacket);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block

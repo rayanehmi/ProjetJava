@@ -40,7 +40,7 @@ public class TCP_Server implements Runnable {
         	String msg="";
         	//System.out.println("debugT1");
         	DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-        	//System.out.println("debugT2");
+        	System.out.println("debugT2");
         	        	
         	while(msg!="/over") 
         	{
@@ -51,7 +51,7 @@ public class TCP_Server implements Runnable {
         		
 	        		while(msg!=null)  
 	            	{
-	            		//System.out.println("debugT3");
+	            		System.out.println("debugT3");
 	    				System.out.println("[MESSAGE RECU " + this.pseudo + "] : " + msg);
 	    				// envoyer les messages vers l'interface
 	    				//messaging.setMessage(name+" sent : "+msg);
