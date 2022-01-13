@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -19,6 +20,7 @@ public class Agent {
 	public static InetAddress IP;
 	public static ArrayList<String> listePseudos = new ArrayList<String>();
 	public static ArrayList<InetAddress> listeIPs = new ArrayList<InetAddress>();
+	public static MainWindow mainWindow;
 	
 	
 	/**
@@ -140,15 +142,19 @@ public class Agent {
 			catch (InterruptedException e) {e.printStackTrace();}
 		}
 		currentPseudo=welcomePage.pseudoChoisi;
+		welcomePage.feedbackText.setForeground(Color.GREEN);
+		welcomePage.feedbackText.setText("Connexion en cours...");
 		
 		//Si le premier pseudo n'est pas disponible, on boucle jusqu'a en trouver un valide
 		while (!checkPseudo(currentPseudo)) {
+			welcomePage.feedbackText.setForeground(Color.RED);
 			welcomePage.feedbackText.setText("Le pseudo "+currentPseudo+" n'est pas disponible.");
 			while (welcomePage.pseudoChoisi == currentPseudo) {
 				try {Thread.sleep(200);} 
 				catch (InterruptedException e) {e.printStackTrace();}
 			}
 			currentPseudo = welcomePage.pseudoChoisi;
+			welcomePage.feedbackText.setForeground(Color.GRAY);
 			welcomePage.feedbackText.setText("Test du pseudo "+currentPseudo);
 		};
 		
@@ -178,8 +184,13 @@ public class Agent {
 		
 		//Connexion a la database
 		
+		
+		//Temporaire : ajoute des faux pseudos connectes
+		listePseudos.add("PseudoTest1");
+		listePseudos.add("PseudoTest2");
+		
 		//Lancement de l'interface principale
-		MainWindow mainWindow = new MainWindow(pseudonyme,listePseudos);
+		mainWindow = new MainWindow(pseudonyme,listePseudos);
 		mainWindow.setVisible(true);
 		
 		//Lancement de l'ecoute des messages entrants (TCP)

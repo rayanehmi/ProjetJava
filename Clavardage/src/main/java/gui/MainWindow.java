@@ -1,29 +1,41 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import java.awt.Font;
+import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.JTextPane;
 
 public class MainWindow extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String pseudoChoisi;
 	public String pseudo;
 	public JPanel contentPane;
 	public ArrayList<String> arrayConnectes;
-	public JList listeConnectes;
+	public JList<String> listeConnectes;
+	public JTextArea feedback;
+	public String messageToSend;
+	public boolean refreshFlag = false;
+	JTextPane mainTextPane;
 
 	/**
 	 * Create the frame.
@@ -45,7 +57,7 @@ public class MainWindow extends JFrame {
 		listeConnectes = new JList(arrayConnectes.toArray());
 		scrollPane.setViewportView(listeConnectes);
 		listeConnectes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listeConnectes.setBorder(new LineBorder(SystemColor.windowBorder));
+		listeConnectes.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		
 		JButton btnNewButton = new JButton("Choose");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -53,48 +65,54 @@ public class MainWindow extends JFrame {
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pseudoChoisi = "pseudo";
+				pseudoChoisi = (String) listeConnectes.getSelectedValue();
+				feedback.setText("Connexion a "+pseudoChoisi+"...");
 			}
 		});
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBounds(10, 10, 830, 50);
-		contentPane.add(textArea);
+		feedback = new JTextArea(" Choisissez un interlocuteur.");
+		feedback.setBackground(new Color(245, 245, 245));
+		feedback.setForeground(Color.BLACK);
+		feedback.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		feedback.setEditable(false);
+		feedback.setBounds(10, 10, 830, 39);
+		contentPane.add(feedback);
 		
 		JTextArea textArea_1 = new JTextArea("Connected as :\n"+pseudo);
 		textArea_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textArea_1.setEditable(false);
-		textArea_1.setBackground(SystemColor.menu);
-		textArea_1.setBounds(850, 10, 224, 50);
+		textArea_1.setBackground(UIManager.getColor("Button.background"));
+		textArea_1.setBounds(850, 10, 224, 51);
 		contentPane.add(textArea_1);
 		
 		JButton btnNewButton_1 = new JButton("Refresh");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				refreshFlag=true;
+				feedback.setText("Rafraichissement des pseudos ...");
+				while (refreshFlag) {}
 			}
 		});
 		btnNewButton_1.setBounds(11, 464, 85, 21);
 		contentPane.add(btnNewButton_1);
 		
-		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setEditable(false);
-		textArea_2.setBounds(201, 69, 840, 416);
-		contentPane.add(textArea_2);
+		JTextArea textAreaMessage = new JTextArea();
+		textAreaMessage.setBounds(10, 495, 823, 76);
+		contentPane.add(textAreaMessage);
 		
-		JTextArea textArea_3 = new JTextArea();
-		textArea_3.setBounds(10, 495, 773, 76);
-		contentPane.add(textArea_3);
-		
-		JButton btnNewButton_2 = new JButton("Envoyer");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnEnvoyer = new JButton("Envoyer");
+		btnEnvoyer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnEnvoyer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(messageToSend==null) {
+					messageToSend = textAreaMessage.getText();
+					textAreaMessage.setText(null);
+				}
 			}
 		});
-		btnNewButton_2.setBounds(793, 497, 248, 34);
-		contentPane.add(btnNewButton_2);
+		btnEnvoyer.setBounds(843, 497, 231, 34);
+		contentPane.add(btnEnvoyer);
 		
 		JButton btnNewButton_3 = new JButton("Partager fichier");
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -102,7 +120,41 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_3.setBounds(793, 541, 248, 30);
+		btnNewButton_3.setBounds(843, 541, 231, 30);
 		contentPane.add(btnNewButton_3);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(201, 71, 873, 414);
+		contentPane.add(scrollPane_1);
+		
+		mainTextPane = new JTextPane();
+		scrollPane_1.setViewportView(mainTextPane);
 	}
+	
+	/**
+	 * Ajoute au panel principal le message "msg" avec la couleur "c".
+	 * @param msg
+	 * @param c
+	 */
+	public void appendToPane(String msg, Color c)
+    {
+        StyleContext sc = StyleContext.getDefaultStyleContext();
+        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Tahoma");
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+
+        int len = mainTextPane.getDocument().getLength();
+        mainTextPane.setCaretPosition(len);
+        mainTextPane.setCharacterAttributes(aset, false);
+        mainTextPane.replaceSelection(msg);
+    }
+	
+	/**
+	 * Efface le contenu du panel principal.
+	 */
+	public void erasePane()
+    {
+        mainTextPane.setText("");
+    }
 }
