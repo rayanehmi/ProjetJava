@@ -164,11 +164,25 @@ public class Agent {
 	}
 	
 	/**
+	 * Fonctionqui lance une conversation avec un pseudo choisi
+	 */
+	
+	public void startConv(){
+		
+		Runnable threadClient = new Thread_Client(listePseudos,listeIPs,mainWindow);
+		Thread thread = new Thread(threadClient);
+		thread.start();
+		
+	}
+	
+	/**
 	 * main.
 	 * Fonction lancee a l'execution du programme
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		Agent agt = new Agent();
 		
 		//Obtention de l'adresse IP
 		IP = getIPAddress();
@@ -199,10 +213,7 @@ public class Agent {
 		TCP_TM.TCP_Server();	
 		
 		//Lancer une conversation avec Rayane
-		try {Thread.sleep(10000);}
-		catch(InterruptedException e) {e.printStackTrace();}
-		TCP_Client Client = new TCP_Client("10.1.15.163","Rayane");
-		Client.conversation();
+		agt.startConv();
 		
 		
 		//System.out.println("Programme termine.");

@@ -23,9 +23,11 @@ import javax.swing.UIManager;
 import javax.swing.JTextPane;
 
 public class MainWindow extends JFrame {
+	
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	public String pseudoChoisi;
 	public String pseudo;
@@ -40,6 +42,7 @@ public class MainWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public MainWindow(String pseudo, ArrayList<String> arrayCo) {
 		this.pseudo=pseudo;
 		this.arrayConnectes = arrayCo;
@@ -67,6 +70,7 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pseudoChoisi = (String) listeConnectes.getSelectedValue();
 				feedback.setText("Connexion a "+pseudoChoisi+"...");
+				
 			}
 		});
 		
