@@ -39,7 +39,9 @@ public class Thread_Client implements Runnable {
 			}
 		}
 		
-		TCP_Client Client = new TCP_Client(IPinitial.toString(),pseudoInitial);
+		//System.out.println(IPinitial.toString());
+		//System.out.println(pseudoInitial);
+		TCP_Client Client = new TCP_Client(IPinitial.toString().substring(1),pseudoInitial);
 		Client.conversation();
 	}
 	
