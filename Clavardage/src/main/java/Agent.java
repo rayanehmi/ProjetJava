@@ -89,6 +89,7 @@ public class Agent {
 	 * @throws Exception 
 	 */
 	private static void refreshConnectedList() throws Exception {
+		
 		listePseudos.clear();
 		listeIPs.clear();
 		//Creation d'un thread manager en charge de recevoir les reponses TCP
@@ -105,6 +106,8 @@ public class Agent {
 		TM.listenRefresh();
 		
 		listAnswers = TM.listResponseThreadManager;
+		String[] tableauPseudos = new String[listAnswers.size()];
+		
 		if (!listAnswers.isEmpty()) {
 			//Pour chaque reponse recue
 			for(int i = 0 ; i < listAnswers.size(); i++) {
@@ -113,14 +116,22 @@ public class Agent {
 					String[] splitMessage = listAnswers.get(i).split("_");
 					
 					if(splitMessage[0].equals("/firstConnexion")) {
-						listePseudos.add(splitMessage[2]);
-						listeIPs.add(InetAddress.getByName(splitMessage[1].substring(1)));
+						if (!splitMessage[2].equals(pseudonyme)) {
+							listePseudos.add(splitMessage[2]);
+							tableauPseudos[i] = splitMessage[2]; 
+							listeIPs.add(InetAddress.getByName(splitMessage[1].substring(1)));
+						}
+						
 					}
 				}
 			}
-		}
+		} 
+		
+
+		mainWindow.arrayConnectes = listePseudos;
+		mainWindow.listeConnectes.setListData(tableauPseudos);
+		
 		mainWindow.feedback.setText("Liste pseudo rafraichie");
-		mainWindow.arrayConnectes=listePseudos; /////////////////////////////////////corriger
 		
 		
 	}
@@ -208,7 +219,7 @@ public class Agent {
 	}
 	
 	/**
-	 * Fonctionqui lance une conversation avec un pseudo choisi
+	 * Fonction qui lance une conversation avec un pseudo choisi
 	 */
 	
 	public void startConv(){
