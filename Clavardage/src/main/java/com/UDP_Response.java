@@ -19,14 +19,19 @@ class UDP_Response implements Runnable {
     private DatagramSocket dgramSocket;
     public BufferedReader in = null; //
     public ArrayList<String> listResponse = new ArrayList<String>();
-
+    public int port;
 	
+
+	public UDP_Response(int port) {
+    	this.port=port;
+    }
+    
 	public void run() {
 		
 		listResponse = new ArrayList<String>();
 
 		try {
-			dgramSocket = new DatagramSocket(10001);
+			dgramSocket = new DatagramSocket(port);
 			dgramSocket.setSoTimeout(2000);
 		} catch (SocketException e1) {
 			// TODO Auto-generated catch block

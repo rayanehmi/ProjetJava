@@ -9,6 +9,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+import javax.swing.JList;
+
 //Fichiers du projet
 import com.*;
 import gui.*;
@@ -66,7 +68,7 @@ public class Agent {
 	 * @throws UnknownHostException 
 	 */
 	private static void updateConnectedList(ArrayList<String> messageList) throws UnknownHostException {
-		//Pour chaque reponse recue par les threads
+		//Pour chaque reponse recue
 		for(int i = 0 ; i < messageList.size(); i++) {
 			if (messageList.get(i)!=null) {
 				//On decoupe le message au niveau des "/"
@@ -78,6 +80,48 @@ public class Agent {
 				}
 			}
 		}
+		
+	}
+	
+	/**
+	 * Met a jour la table des pseudos & la table des IPs.
+	 * pseudo[i] correspond a IP[i].
+	 * @throws Exception 
+	 */
+	private static void refreshConnectedList() throws Exception {
+		listePseudos.clear();
+		listeIPs.clear();
+		//Creation d'un thread manager en charge de recevoir les reponses TCP
+		ThreadManager TM = new ThreadManager();
+		ArrayList<String> listAnswers = new ArrayList<String>();
+		
+		//Lancement du broadcast sur le reseau local
+		String[] temp= IP.toString().substring(1).split("\\.");
+		InetAddress broadcastAdress = InetAddress.getByName(temp[0]+"."+temp[1]+".255.255");
+		broadcast("/refresh",broadcastAdress);
+		System.out.println("Broadcast lance");
+		
+		//Appel du server sur Ecoute
+		TM.listenRefresh();
+		
+		listAnswers = TM.listResponseThreadManager;
+		if (!listAnswers.isEmpty()) {
+			//Pour chaque reponse recue
+			for(int i = 0 ; i < listAnswers.size(); i++) {
+				if (listAnswers.get(i)!=null) {
+					//On decoupe le message au niveau des "/"
+					String[] splitMessage = listAnswers.get(i).split("_");
+					
+					if(splitMessage[0].equals("/firstConnexion")) {
+						listePseudos.add(splitMessage[2]);
+						listeIPs.add(InetAddress.getByName(splitMessage[1].substring(1)));
+					}
+				}
+			}
+		}
+		mainWindow.feedback.setText("Liste pseudo rafraichie");
+		mainWindow.arrayConnectes=listePseudos; /////////////////////////////////////corriger
+		
 		
 	}
 	
@@ -215,7 +259,15 @@ public class Agent {
 		//Lancer une conversation avec Rayane
 		agt.startConv();
 		
-		
+		while(true) {
+			try {Thread.sleep(200);} 
+			catch (InterruptedException e) {e.printStackTrace();}
+			if (mainWindow.refreshFlag) {
+				System.out.println("Demande de rafraichissement...");
+				mainWindow.refreshFlag=false;
+				refreshConnectedList();
+			}
+		}
 		//System.out.println("Programme termine.");
 		//System.exit(0);
 	}

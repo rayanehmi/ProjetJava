@@ -67,7 +67,24 @@ class UDP_Listener implements Runnable {
 						e1.printStackTrace();
 					}
     				
-				} 
+				}
+    			
+    			else if (msgRecu[0].equals("/refresh")) {
+    				String response = "/firstConnexion_"+IP+"_"+pseudo;
+    				
+    				DatagramPacket outPacket = new DatagramPacket(response.getBytes(), response.length(),
+    				clientAddress, 10002);
+    		
+    				try {
+    					try {Thread.sleep(200);}
+    					catch(InterruptedException e) {e.printStackTrace();}
+						dgramSocket.send(outPacket);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+    				
+				}
     		}
 	
 		}

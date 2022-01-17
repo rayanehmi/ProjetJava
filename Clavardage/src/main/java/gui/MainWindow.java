@@ -95,7 +95,7 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				refreshFlag=true;
 				feedback.setText("Rafraichissement des pseudos ...");
-				while (refreshFlag) {}
+				
 			}
 		});
 		btnNewButton_1.setBounds(11, 464, 85, 21);

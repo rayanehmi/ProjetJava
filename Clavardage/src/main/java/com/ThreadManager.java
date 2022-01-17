@@ -27,7 +27,7 @@ public class ThreadManager {
 		
 		listResponseThreadManager = new ArrayList<String>();
 		
-		UDP_Response UDP_Response = new UDP_Response();
+		UDP_Response UDP_Response = new UDP_Response(10001);
 		UDP_Response.run();
 		
 		int i = UDP_Response.listResponse.size();
@@ -41,6 +41,30 @@ public class ThreadManager {
 		}
 		
 	}
+	
+	/**
+     * Ecoute les broadcasts.
+     * Stocke les reponses dans listResponseThreadManager
+     */
+	public void listenRefresh() throws Exception {
+		
+		listResponseThreadManager = new ArrayList<String>();
+		
+		UDP_Response UDP_Response = new UDP_Response(10002);
+		UDP_Response.run();
+		
+		int i = UDP_Response.listResponse.size();
+		int k = 0;
+		
+		System.out.println(i + " reponses recues");
+		
+		while ( k < i) {
+			listResponseThreadManager.add(UDP_Response.listResponse.get(k));
+			k++;
+		}
+		
+	}
+	
 	
 	/**
      * Ecoute les broadcasts.
