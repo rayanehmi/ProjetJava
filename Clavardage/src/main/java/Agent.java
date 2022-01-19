@@ -23,6 +23,7 @@ public class Agent {
 	public static ArrayList<String> listePseudos = new ArrayList<String>();
 	public static ArrayList<InetAddress> listeIPs = new ArrayList<InetAddress>();
 	public static MainWindow mainWindow;
+	public static String pseudoSelectionne = "";
 	
 	
 	/**
@@ -235,7 +236,7 @@ public class Agent {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		
+
 		//Obtention de l'adresse IP
 		IP = getIPAddress();
 		
@@ -263,12 +264,7 @@ public class Agent {
 		//Lancement de l'ecoute des messages entrants (TCP)
 
 		ThreadManager TCP_TM = new ThreadManager(pseudonyme, IP);
-		TCP_TM.TCP_Server();	
-		
-		//Lancer une conversation avec Rayane
-		Runnable threadClient = new Thread_Client(listePseudos,listeIPs,mainWindow);
-		Thread thread = new Thread(threadClient);
-		thread.start();
+		TCP_TM.TCP_Server(mainWindow);	
 		
 		while(true) {
 			try {Thread.sleep(200);} 
@@ -278,6 +274,10 @@ public class Agent {
 				mainWindow.refreshFlag=false;
 				UDP_Listener.newEntryFlag=false;
 				refreshConnectedList();
+			}
+			if (mainWindow.pseudoChoisi != pseudoSelectionne ) {
+				pseudoSelectionne = mainWindow.pseudoChoisi ;
+				startConv();
 			}
 		}
 		//System.out.println("Programme termine.");

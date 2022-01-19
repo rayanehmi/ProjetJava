@@ -4,6 +4,8 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+import gui.MainWindow;
+
 
 public class ThreadManager {
 	
@@ -83,9 +85,9 @@ public class ThreadManager {
      * Ecoute les messages en TCP.
      * Cree un nouveau Thread pour chaque nouvelle connexion (max 10 connexion en meme temps )
      */
-	public void TCP_Server() {
+	public void TCP_Server(MainWindow mainWindow) {
 		
-		Runnable threadServerTCP = new Thread_TCP(pseudo,IP);
+		Runnable threadServerTCP = new Thread_TCP(pseudo,IP,mainWindow);
 		Thread thread = new Thread(threadServerTCP);
 		thread.start();
 		

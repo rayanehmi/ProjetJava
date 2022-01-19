@@ -29,13 +29,13 @@ public class MainWindow extends JFrame {
 	 */
 	
 	private static final long serialVersionUID = 1L;
-	public String pseudoChoisi;
+	public String pseudoChoisi="";
 	public String pseudo;
 	public JPanel contentPane;
 	public ArrayList<String> arrayConnectes;
 	public JList<String> listeConnectes;
 	public JTextArea feedback;
-	public String messageToSend;
+	public String messageToSend="";
 	public boolean refreshFlag = false;
 	JTextPane mainTextPane;
 
@@ -70,7 +70,7 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pseudoChoisi = (String) listeConnectes.getSelectedValue();
 				feedback.setText("Connexion a "+pseudoChoisi+"...");
-				
+				erasePane();
 			}
 		});
 		
@@ -109,10 +109,12 @@ public class MainWindow extends JFrame {
 		btnEnvoyer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnEnvoyer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(messageToSend==null) {
+				//if(messageToSend=="") {
+				
 					messageToSend = textAreaMessage.getText();
-					textAreaMessage.setText(null);
-				}
+					System.out.println("Changement du msg : "+messageToSend);
+					textAreaMessage.setText("");
+				//}
 			}
 		});
 		btnEnvoyer.setBounds(843, 497, 231, 34);

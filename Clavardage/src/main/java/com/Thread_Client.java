@@ -40,7 +40,7 @@ public class Thread_Client implements Runnable {
 		}
 		
 		//System.out.println(IPinitial.toString());
-		//System.out.println(pseudoInitial);
+		System.out.println("TEST PSEUDO : "+pseudoInitial);
 		
 		TCP_Client Client = new TCP_Client(IPinitial.toString().substring(1),pseudoInitial, mainWindow);
 		Client.conversation();

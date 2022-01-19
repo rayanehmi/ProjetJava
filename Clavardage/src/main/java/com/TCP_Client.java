@@ -11,13 +11,15 @@ public class TCP_Client {
 	
 	public String IPDest;
 	public String pseudoDest;
-	public ArrayList<String> listeMessages;
+	public ArrayList<String> listeMessages = new ArrayList<String>();
 	public MainWindow mainWindow;
+	private String pseudo;
 
 	public TCP_Client(String IPDest, String pseudoDest, MainWindow mainWindow) {
 		this.IPDest = IPDest;
 		this.pseudoDest = pseudoDest;
 		this.mainWindow=mainWindow;
+		this.pseudo = mainWindow.pseudo;
 	}
 	
 	public String getIP() {
@@ -35,20 +37,6 @@ public class TCP_Client {
 		Socket ClientSocket = null;
 		PrintWriter out = null;
 		
-		mainWindow.erasePane();
-		if (!listeMessages.isEmpty()) {
-			for (String message : listeMessages) {
-				String[] splitMessage = message.split("_");
-				if (splitMessage[0]==pseudoDest) {
-					mainWindow.appendToPane(splitMessage[0],Color.blue); //pseudo collegue 
-				} else {
-					mainWindow.appendToPane(splitMessage[0],Color.red); //pseudo
-				}
-				//mainWindow.appendToPane(", a \n"+splitMessage[2],Color.grey); //heure
-				mainWindow.appendToPane(splitMessage[1]+"\n",Color.black); //message
-			}
-			
-		}
 		
 		try {
 			ClientSocket = new Socket(this.IPDest,port);
@@ -70,25 +58,25 @@ public class TCP_Client {
 
 		
 		String msg ="";
-
 			while (!msg.equals("/over"))
 				{
-				Scanner p = new Scanner(System.in);
-				msg = p.nextLine();
-
-					if (msg!="") {
-						listeMessages.add(pseudoDest+"_"+msg);
-						mainWindow.appendToPane(pseudoDest,Color.blue); //pseudo collegue 
+				
+				try {Thread.sleep(200);} 
+				catch (InterruptedException e) {e.printStackTrace();}
+				msg = mainWindow.messageToSend;
+				
+					if (!msg.equals("")) {
+						listeMessages.add(pseudo+"_"+msg);
+						out.println(pseudo+"_"+msg);
+						mainWindow.appendToPane(pseudo + " said : ",Color.blue); //pseudo collegue 
 						mainWindow.appendToPane(msg+"\n",Color.black); //contenu
-						System.out.println("[MESSAGE ENVOYE PAR " + this.pseudoDest + "] : " + msg);
-						//msg = this.pseudoDest + "_" + msg;
-						//out.println(msg);
+						System.out.println("[MESSAGE ENVOYE PAR " + this.pseudo + "] : " + msg);
 						out.flush();
+						mainWindow.messageToSend="";
 					}
-					
-				p.close();
+				
+				
 				}
-		
 		
 		try {
 			ClientSocket.close();

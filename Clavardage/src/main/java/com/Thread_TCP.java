@@ -7,14 +7,18 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import gui.MainWindow;
+
 public class Thread_TCP implements Runnable {
 	
-	public String pseudo;
+	public String pseudoDest;
 	public InetAddress IP;
+	public MainWindow mainWindow;
 	
-	public Thread_TCP(String pseudo,InetAddress IP) {
-		this.pseudo = pseudo;
+	public Thread_TCP(String pseudo,InetAddress IP, MainWindow mainWindow) {
+		this.pseudoDest = pseudo;
 		this.IP = IP;
+		this.mainWindow=mainWindow;
 	}
 	
 	public void run() {
@@ -31,7 +35,7 @@ public class Thread_TCP implements Runnable {
                 Socket clientSocket = mServerSocket.accept();
                 System.out.println("new connexion " + i);
                 
-                Runnable TCP_Server = new TCP_Server(this.pseudo, clientSocket);
+                Runnable TCP_Server = new TCP_Server(this.pseudoDest, clientSocket, mainWindow);
                 pool.execute(TCP_Server);
                 i++;
                 
