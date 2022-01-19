@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="THEEEE_Projet" version="4">
+  <OBJECT>
+    <ID name="THEEEE_Projet" mc="Standard.Project" uid="f6a53b77-4336-4c88-8cfd-421193c031cd"/>
+    <ATTRIBUTES>
+      <ATT name="ProjectContext"></ATT>
+      <ATT name="ProjectDescr"></ATT>
+      <ATT name="Name"><![CDATA[THEEEE_Projet]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Model">
+        <COMPID name="theeee_projet" mc="Standard.Package" uid="d9275376-bec3-4448-8c4f-cd116985e4ff"/>
+      </COMP>
+      <COMP relation="DiagramRoot">
+        <COMPID name="THEEEE_Projet" mc="Infrastructure.DiagramSet" uid="1a978bf4-3f8f-4cdd-bf50-943840e5b435"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

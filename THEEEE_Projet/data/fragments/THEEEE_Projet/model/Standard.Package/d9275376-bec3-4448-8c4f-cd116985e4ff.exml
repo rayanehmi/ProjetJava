@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="theeee_projet" version="4">
+  <OBJECT>
+    <ID name="theeee_projet" mc="Standard.Package" uid="d9275376-bec3-4448-8c4f-cd116985e4ff"/>
+    <PID name="THEEEE_Projet" mc="Standard.Project" uid="f6a53b77-4336-4c88-8cfd-421193c031cd"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[theeee_projet]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedBehavior">
+        <COMPID name="Interaction" mc="Standard.Interaction" uid="7265df90-f720-41bf-b9f1-2fc11e600ddf"/>
+        <COMPID name="Interaction1" mc="Standard.Interaction" uid="8015a7e7-3ad2-4db5-bdb5-57c006b24a4a"/>
+        <COMPID name="Interaction2" mc="Standard.Interaction" uid="31631c16-23ea-45db-9218-fbb3cba9d038"/>
+        <COMPID name="Interaction3" mc="Standard.Interaction" uid="8c142def-ae5a-4e04-826b-427facf4e437"/>
+        <COMPID name="Interaction4" mc="Standard.Interaction" uid="a082baf1-a1d6-4926-8366-ef264bbe7c3b"/>
+        <COMPID name="Interaction5" mc="Standard.Interaction" uid="fea292bc-e8d9-41d6-bdc7-c958c80fb07f"/>
+      </COMP>
+      <COMP relation="OwnedElement">
+        <COMPID name="Utilisateur" mc="Standard.Actor" uid="c9252e39-b67b-4a72-a081-49b9ff07d945"/>
+        <COMPID name="Echanger (texte, images, schéma...)" mc="Standard.UseCase" uid="a34d86f4-dd41-430b-88b4-71c522b4bd0f"/>
+        <COMPID name="Envoyer" mc="Standard.UseCase" uid="416b9d2d-76ad-4513-a954-5b34a70407d3"/>
+        <COMPID name="Recevoir" mc="Standard.UseCase" uid="9426c86a-2b2e-4520-8bc7-5ee277b64c51"/>
+        <COMPID name="Choisir Pseudo" mc="Standard.UseCase" uid="5b429890-cf08-44a5-9815-2ba5a2367a84"/>
+        <COMPID name="Identifier les Utilisateurs" mc="Standard.UseCase" uid="7e1b7f9a-840c-4f18-8e43-117a160ae18f"/>
+        <COMPID name="Acceder a un chat" mc="Standard.UseCase" uid="b30cff0e-8d3b-4fee-ad95-b3b090ba00f7"/>
+        <COMPID name="Verifier Pseudo" mc="Standard.UseCase" uid="368d8ebd-4fd0-4612-94b6-448787f24b6c"/>
+        <COMPID name="Horodater" mc="Standard.UseCase" uid="835b4d8f-44ac-484b-869a-87d660eaac53"/>
+        <COMPID name="Fin Clavardage" mc="Standard.UseCase" uid="cece5293-928a-4b35-833b-91d71066b81d"/>
+        <COMPID name="Afficher historique" mc="Standard.UseCase" uid="e7ca70d2-9726-4f40-aeb9-d669270ccbbc"/>
+        <COMPID name="Sauvgarder messages" mc="Standard.UseCase" uid="4e6fd7d6-4bfc-41ac-9e9c-54da457e0020"/>
+        <COMPID name="Collègue" mc="Standard.Actor" uid="cea7d701-23bf-4b7e-ab7d-dd91ebc265fd"/>
+        <COMPID name="Technicien" mc="Standard.Actor" uid="5dc1fd6c-ae08-4f06-9850-57c7d94d046a"/>
+        <COMPID name="Changer Pseudo" mc="Standard.UseCase" uid="0a8054c1-89f2-4c4e-b73e-bcb8888823c0"/>
+        <COMPID name="Communiquer nouveau pseudo" mc="Standard.UseCase" uid="405b012b-d982-4f1e-85aa-c777ba99dfab"/>
+        <COMPID name="Ajouter module" mc="Standard.UseCase" uid="fd3c570c-6ca0-44cc-9c63-72480c36c908"/>
+        <COMPID name="Installer logiciel" mc="Standard.UseCase" uid="24ec9023-9c6b-40c1-a556-7cfe56909c9f"/>
+        <COMPID name="Acceder à la page d'accueil" mc="Standard.UseCase" uid="947a8f08-cb43-4843-a49f-341457f506a4"/>
+        <COMPID name="Machine" mc="Standard.Class" uid="96bd03f4-22de-472c-935e-bdd3675998c1"/>
+        <COMPID name="Utilisateur" mc="Standard.Class" uid="720830a6-fda3-4dd8-a8fb-11ad76527a74"/>
+        <COMPID name="Agent" mc="Standard.Class" uid="45e2813a-5f8e-45ea-9252-ec8ca265d0de"/>
+        <COMPID name="Technicien" mc="Standard.Class" uid="27830645-a6c5-474b-9e5e-dfca4a2b813c"/>
+        <COMPID name="Machine-Agent" mc="Standard.Class" uid="eb864fb5-498b-4465-82ed-11bd6268ff87"/>
+        <COMPID name="Interface" mc="Standard.Class" uid="1e54aba6-cb71-49da-9cdb-5504e1571805"/>
+        <COMPID name="Interface choisir de pseudo" mc="Standard.Class" uid="0c0faed0-b4cf-4dd4-b302-84e573f78090"/>
+        <COMPID name="Interface messagerie" mc="Standard.Class" uid="181fb71c-e3b8-47c5-83c8-76d158f39c8f"/>
+        <COMPID name="Interface choisir collègue" mc="Standard.Class" uid="bca8797a-d285-4377-a599-8f11c2a78464"/>
+        <COMPID name="serverSocket" mc="Standard.Class" uid="564276b3-7915-4652-808e-6d6ae96f70e4"/>
+        <COMPID name="clientSocket" mc="Standard.Class" uid="bf433d5a-fb7f-4a0f-91e1-01f957423fdf"/>
+        <COMPID name="BaseDeDonnees" mc="Standard.Class" uid="d123c3d3-8ff9-46e6-9cd9-6b56cd2fa26c"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Diagramme de cas d'utilisation theeee_projet" mc="Standard.UseCaseDiagram" uid="5d7f9faf-8c21-48d5-856b-3a6a90e93759"/>
+        <COMPID name="Diagramme de classe theeee_projet" mc="Standard.ClassDiagram" uid="eb7ade7c-1826-40a6-94dd-a20bb9729320"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

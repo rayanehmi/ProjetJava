@@ -1,0 +1,7 @@
+#Fri Nov 05 16:49:47 CET 2021
+org.modelio.app.diagram.editor.OpenedDiagrams5='Diagramme de s\u00E9quence Afficher personnes en ligne' {e62f10d4-f2d6-443c-b251-f75930bcce70} Standard.SequenceDiagram
+org.modelio.app.diagram.editor.OpenedDiagrams4='Diagramme de classe theeee_projet' {eb7ade7c-1826-40a6-94dd-a20bb9729320} Standard.ClassDiagram
+org.modelio.app.diagram.editor.OpenedDiagrams3='Diagramme de s\u00E9quence \: envoyer message' {6a2f88d4-c8e8-4d0b-b8be-164669fc6c0a} Standard.SequenceDiagram
+org.modelio.app.diagram.editor.OpenedDiagrams2='Diagramme de s\u00E9quence \: changer pseudo' {c172d695-ad8e-4b42-ae3f-3651d70098dd} Standard.SequenceDiagram
+org.modelio.app.diagram.editor.OpenedDiagrams1='Diagramme de s\u00E9quence \: se connecter' {c75e32c1-cf14-4af5-a202-ed8e14618106} Standard.SequenceDiagram
+org.modelio.app.diagram.editor.OpenedDiagrams0='Diagramme de cas d'utilisation theeee_projet' {5d7f9faf-8c21-48d5-856b-3a6a90e93759} Standard.UseCaseDiagram
