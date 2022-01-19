@@ -36,15 +36,18 @@ public class TCP_Client {
 		PrintWriter out = null;
 		
 		mainWindow.erasePane();
-		for (String message : listeMessages) {
-			String[] splitMessage = message.split("_");
-			if (splitMessage[0]==pseudoDest) {
-				mainWindow.appendToPane(splitMessage[0],Color.blue); //pseudo collegue 
-			} else {
-				mainWindow.appendToPane(splitMessage[0],Color.red); //pseudo
+		if (!listeMessages.isEmpty()) {
+			for (String message : listeMessages) {
+				String[] splitMessage = message.split("_");
+				if (splitMessage[0]==pseudoDest) {
+					mainWindow.appendToPane(splitMessage[0],Color.blue); //pseudo collegue 
+				} else {
+					mainWindow.appendToPane(splitMessage[0],Color.red); //pseudo
+				}
+				//mainWindow.appendToPane(", a \n"+splitMessage[2],Color.grey); //heure
+				mainWindow.appendToPane(splitMessage[1]+"\n",Color.black); //message
 			}
-			//mainWindow.appendToPane(", a \n"+splitMessage[2],Color.grey); //heure
-			mainWindow.appendToPane(splitMessage[1]+"\n",Color.black); //message
+			
 		}
 		
 		try {

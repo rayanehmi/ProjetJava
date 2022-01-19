@@ -54,7 +54,7 @@ class UDP_Listener implements Runnable {
 			if (message != null) {
     			String[] msgRecu = message.split("_");
     			
-    			if (msgRecu[0].equals("/askingConnexion")&&(!msgRecu[1].equals(IP.toString()))) {
+    			if (msgRecu[0].equals("/askingConnexion")) {
     				String response = "/firstConnexion_"+IP+"_"+pseudo;
     				newEntryFlag=true;
     				DatagramPacket outPacket = new DatagramPacket(response.getBytes(), response.length(),
