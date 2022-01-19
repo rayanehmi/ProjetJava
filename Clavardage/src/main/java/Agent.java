@@ -130,7 +130,6 @@ public class Agent {
 
 		mainWindow.arrayConnectes = listePseudos;
 		mainWindow.listeConnectes.setListData(tableauPseudos);
-		
 		mainWindow.feedback.setText("Liste pseudo rafraichie");
 		
 		
@@ -222,7 +221,7 @@ public class Agent {
 	 * Fonction qui lance une conversation avec un pseudo choisi
 	 */
 	
-	public void startConv(){
+	public static void startConv(){
 		
 		Runnable threadClient = new Thread_Client(listePseudos,listeIPs,mainWindow);
 		Thread thread = new Thread(threadClient);
@@ -237,8 +236,6 @@ public class Agent {
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		Agent agt = new Agent();
-		
 		//Obtention de l'adresse IP
 		IP = getIPAddress();
 		
@@ -250,6 +247,7 @@ public class Agent {
 		System.out.println("Lancement du server UDP sur ecoute");
 		ThreadManager UDP_Listener = new ThreadManager();
 		UDP_Listener.UDP_Server(pseudonyme, IP);
+		
 		
 		//Connexion a la database
 		
@@ -268,14 +266,17 @@ public class Agent {
 		TCP_TM.TCP_Server();	
 		
 		//Lancer une conversation avec Rayane
-		agt.startConv();
+		Runnable threadClient = new Thread_Client(listePseudos,listeIPs,mainWindow);
+		Thread thread = new Thread(threadClient);
+		thread.start();
 		
 		while(true) {
 			try {Thread.sleep(200);} 
 			catch (InterruptedException e) {e.printStackTrace();}
-			if (mainWindow.refreshFlag) {
+			if (mainWindow.refreshFlag||UDP_Listener.newEntryFlag) {
 				System.out.println("Demande de rafraichissement...");
 				mainWindow.refreshFlag=false;
+				UDP_Listener.newEntryFlag=false;
 				refreshConnectedList();
 			}
 		}

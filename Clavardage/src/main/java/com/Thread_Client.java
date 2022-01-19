@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import gui.MainWindow;
 
 public class Thread_Client implements Runnable {
-	
+	public ArrayList<String> listeMessages= new ArrayList<String>();
 	public ArrayList<String> listePseudos = new ArrayList<String>();
 	public ArrayList<InetAddress> listeIPs = new ArrayList<InetAddress>();
 	public MainWindow mainWindow;
@@ -41,7 +41,8 @@ public class Thread_Client implements Runnable {
 		
 		//System.out.println(IPinitial.toString());
 		//System.out.println(pseudoInitial);
-		TCP_Client Client = new TCP_Client(IPinitial.toString().substring(1),pseudoInitial);
+		
+		TCP_Client Client = new TCP_Client(IPinitial.toString().substring(1),pseudoInitial, mainWindow);
 		Client.conversation();
 	}
 	

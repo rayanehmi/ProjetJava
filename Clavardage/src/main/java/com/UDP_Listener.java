@@ -12,10 +12,12 @@ class UDP_Listener implements Runnable {
 	private InetAddress IP;
 	private String pseudo;
     private DatagramSocket dgramSocket;
+    public boolean newEntryFlag;
 
-    public UDP_Listener(String pseudo, InetAddress IP) {
+    public UDP_Listener(String pseudo, InetAddress IP, boolean newEntryFlag) {
         this.IP = IP;
         this.pseudo = pseudo;
+        this.newEntryFlag=newEntryFlag;
     }
 
 
@@ -52,9 +54,9 @@ class UDP_Listener implements Runnable {
 			if (message != null) {
     			String[] msgRecu = message.split("_");
     			
-    			if (msgRecu[0].equals("/askingConnexion")) {
+    			if (msgRecu[0].equals("/askingConnexion")&&(!msgRecu[1].equals(IP.toString()))) {
     				String response = "/firstConnexion_"+IP+"_"+pseudo;
-    				
+    				newEntryFlag=true;
     				DatagramPacket outPacket = new DatagramPacket(response.getBytes(), response.length(),
     				clientAddress, 10001);
     		
