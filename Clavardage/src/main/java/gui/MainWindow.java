@@ -19,8 +19,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.UIManager;
 import javax.swing.JTextPane;
+import javax.swing.JTabbedPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainWindow extends JFrame {
 	
@@ -37,8 +42,9 @@ public class MainWindow extends JFrame {
 	public JTextArea feedback;
 	public String messageToSend="";
 	public boolean refreshFlag = false;
-	JTextPane mainTextPane;
-
+	public JTabbedPane tabbedPane;
+	public ArrayList<JTextPane> tabList = new ArrayList<JTextPane>();
+	public ArrayList<String> openedTabNames = new ArrayList<String>();
 	/**
 	 * Create the frame.
 	 */
@@ -70,7 +76,6 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pseudoChoisi = (String) listeConnectes.getSelectedValue();
 				feedback.setText("Connexion a "+pseudoChoisi+"...");
-				erasePane();
 			}
 		});
 		
@@ -102,6 +107,16 @@ public class MainWindow extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JTextArea textAreaMessage = new JTextArea();
+		textAreaMessage.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					messageToSend = textAreaMessage.getText();
+					System.out.println("Changement du msg : "+messageToSend);
+					textAreaMessage.setText("");
+				}
+			}
+		});
 		textAreaMessage.setBounds(10, 495, 823, 76);
 		contentPane.add(textAreaMessage);
 		
@@ -130,19 +145,67 @@ public class MainWindow extends JFrame {
 		contentPane.add(btnNewButton_3);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(201, 71, 873, 414);
+		scrollPane_1.setBounds(201, 69, 875, 415);
 		contentPane.add(scrollPane_1);
 		
-		mainTextPane = new JTextPane();
-		scrollPane_1.setViewportView(mainTextPane);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		scrollPane_1.setViewportView(tabbedPane);
+		
+		appendToTabbedPane("home", "message", Color.blue);
+		appendToTabbedPane("home2", "test", Color.blue);
+		appendToTabbedPane("home3", "mdrr", Color.blue);
+		
 	}
+	
+	/**
+	 * Ajoute une tab dans la gui contenant un JTextPane.
+	 * Rajoute le pseudo dans la liste openedTabNames.
+	 * Rajoute le JTextPane dans la liste tabList.
+	 */
+	public void addTabToPane(String pseudo)
+    {
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(201, 70, 875, 415);
+        tabbedPane.addTab(pseudo, textPane);
+        tabList.add(textPane);
+        openedTabNames.add(pseudo);
+    }
+	
+	/**
+	 * Ajoute au panel principal le message "msg" avec la couleur "c".
+	 * Cree la tab si elle n'existe pas.
+	 * @param msg
+	 * @param c
+	 */
+	public void appendToTabbedPane(String pseudo, String msg, Color c)
+    {
+		
+		int index = openedTabNames.indexOf(pseudo);
+		if (index==-1) {
+			addTabToPane(pseudo);
+			index = openedTabNames.indexOf(pseudo);
+		}
+		JTextPane textPane = tabList.get(index);
+		
+		
+        StyleContext sc = StyleContext.getDefaultStyleContext();
+        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Tahoma");
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+
+        int len = textPane.getDocument().getLength();
+        textPane.setCaretPosition(len);
+        textPane.setCharacterAttributes(aset, false);
+        textPane.replaceSelection(msg);
+    }
 	
 	/**
 	 * Ajoute au panel principal le message "msg" avec la couleur "c".
 	 * @param msg
 	 * @param c
 	 */
-	public void appendToPane(String msg, Color c)
+	public void appendToPane(JTextPane mainTextPane, String msg, Color c)
     {
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
@@ -159,8 +222,8 @@ public class MainWindow extends JFrame {
 	/**
 	 * Efface le contenu du panel principal.
 	 */
-	public void erasePane()
+	public void erasePane(JTextPane textPane)
     {
-        mainTextPane.setText("");
+        textPane.setText("");
     }
 }

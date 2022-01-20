@@ -68,8 +68,8 @@ public class TCP_Client {
 					if (!msg.equals("")) {
 						listeMessages.add(pseudo+"_"+msg);
 						out.println(pseudo+"_"+msg);
-						mainWindow.appendToPane(pseudo + " said : ",Color.blue); //pseudo collegue 
-						mainWindow.appendToPane(msg+"\n",Color.black); //contenu
+						mainWindow.appendToTabbedPane(pseudoDest,pseudo + " said : ",Color.blue); //pseudo collegue 
+						mainWindow.appendToTabbedPane(pseudoDest,msg+"\n",Color.black); //contenu
 						System.out.println("[MESSAGE ENVOYE PAR " + this.pseudo + "] : " + msg);
 						out.flush();
 						mainWindow.messageToSend="";
