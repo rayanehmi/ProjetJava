@@ -45,14 +45,22 @@ public class MainWindow extends JFrame {
 	public JTabbedPane tabbedPane;
 	public ArrayList<JTextPane> tabList = new ArrayList<JTextPane>();
 	public ArrayList<String> openedTabNames = new ArrayList<String>();
+	public boolean exitFlag = false;
 	/**
 	 * Create the frame.
 	 */
 	
 	public MainWindow(String pseudo, ArrayList<String> arrayCo) {
+		
+		addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+            	exitFlag=true;
+            }
+        });
+		
 		this.pseudo=pseudo;
 		this.arrayConnectes = arrayCo;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 618);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

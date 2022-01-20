@@ -99,8 +99,8 @@ public class Agent {
 		
 		//Lancement du broadcast sur le reseau local
 		String[] temp= IP.toString().substring(1).split("\\.");
-		InetAddress broadcastAdress = InetAddress.getByName(temp[0]+"."+temp[1]+".255.255");
-		broadcast("/refresh",broadcastAdress);
+		InetAddress broadcastAddress = InetAddress.getByName(temp[0]+"."+temp[1]+".255.255");
+		broadcast("/refresh",broadcastAddress);
 		System.out.println("Broadcast lance");
 		
 		//Appel du server sur Ecoute
@@ -279,9 +279,14 @@ public class Agent {
 				pseudoSelectionne = mainWindow.pseudoChoisi ;
 				startConv();
 			}
+			if (mainWindow.exitFlag) {
+				System.out.println("Leaving...");
+				String[] temp= IP.toString().substring(1).split("\\.");
+				InetAddress broadcastAddress = InetAddress.getByName(temp[0]+"."+temp[1]+".255.255");
+				broadcast("/over_"+pseudonyme, broadcastAddress);
+				System.exit(0);
+			}
 		}
-		//System.out.println("Programme termine.");
-		//System.exit(0);
 	}
 
 }

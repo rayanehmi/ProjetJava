@@ -1,5 +1,6 @@
 package com;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -58,7 +59,7 @@ class UDP_Listener implements Runnable {
     			
     			if (msgRecu[0].equals("/askingConnexion")) {
     				String response = "/firstConnexion_"+IP+"_"+pseudo;
-    				mainWindow.refreshFlag = true;
+    				
     				DatagramPacket outPacket = new DatagramPacket(response.getBytes(), response.length(),
     				clientAddress, 10001);
     		
@@ -87,6 +88,12 @@ class UDP_Listener implements Runnable {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+    				
+				}
+    			
+    			else if (msgRecu[0].equals("/over")) {
+    				
+    				mainWindow.appendToTabbedPane(msgRecu[1], msgRecu[1]+" s'est deconnecte.", Color.gray);
     				
 				}
     		}
