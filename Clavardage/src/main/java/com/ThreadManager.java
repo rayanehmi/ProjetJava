@@ -20,6 +20,10 @@ public class ThreadManager {
     }
     
     public ThreadManager() {
+    }	
+    
+    public ThreadManager(boolean newEntryFlag) {
+    	this.newEntryFlag= newEntryFlag;
     }		
 	
 	/**

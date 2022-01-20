@@ -151,9 +151,7 @@ public class MainWindow extends JFrame {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		scrollPane_1.setViewportView(tabbedPane);
 		
-		appendToTabbedPane("home", "message", Color.blue);
-		appendToTabbedPane("home2", "test", Color.blue);
-		appendToTabbedPane("home3", "mdrr", Color.blue);
+		
 		
 	}
 	
@@ -166,6 +164,7 @@ public class MainWindow extends JFrame {
     {
 		JTextPane textPane = new JTextPane();
 		textPane.setBounds(201, 70, 875, 415);
+		textPane.setEditable(false);
         tabbedPane.addTab(pseudo, textPane);
         tabList.add(textPane);
         openedTabNames.add(pseudo);

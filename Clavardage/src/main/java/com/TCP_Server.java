@@ -61,8 +61,8 @@ public class TCP_Server implements Runnable {
 	    				System.out.println("[MESSAGE RECU " + this.pseudoDest + "] : " + msg);
 	    				msgRecu = msg.split("_");
 	    				// envoyer les messages vers l'interface
-	    				mainWindow.appendToTabbedPane(pseudoDest,msgRecu[0] + " said : ",Color.red); //pseudo collegue 
-						mainWindow.appendToTabbedPane(pseudoDest,msgRecu[1]+"\n",Color.black); //contenu
+	    				mainWindow.appendToTabbedPane(msgRecu[0],msgRecu[0] + " said : ",Color.red); //pseudo collegue 
+						mainWindow.appendToTabbedPane(msgRecu[0],msgRecu[1]+"\n",Color.black); //contenu
 						
 	    				// envoyer les messages vers la DataBase
 						

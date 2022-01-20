@@ -24,7 +24,7 @@ public class Agent {
 	public static ArrayList<InetAddress> listeIPs = new ArrayList<InetAddress>();
 	public static MainWindow mainWindow;
 	public static String pseudoSelectionne = "";
-	
+	public static boolean newEntryFlag;
 	
 	/**
 	 * Renvoie une adresse IP locale.
@@ -246,7 +246,7 @@ public class Agent {
 		
 		//Lancement de l'ecoute des broadcasts
 		System.out.println("Lancement du server UDP sur ecoute");
-		ThreadManager UDP_Listener = new ThreadManager();
+		ThreadManager UDP_Listener = new ThreadManager(newEntryFlag);
 		UDP_Listener.UDP_Server(pseudonyme, IP);
 		
 		
@@ -269,6 +269,7 @@ public class Agent {
 		while(true) {
 			try {Thread.sleep(200);} 
 			catch (InterruptedException e) {e.printStackTrace();}
+			//System.out.println(UDP_Listener.newEntryFlag);
 			if (mainWindow.refreshFlag||UDP_Listener.newEntryFlag) {
 				System.out.println("Demande de rafraichissement...");
 				mainWindow.refreshFlag=false;
