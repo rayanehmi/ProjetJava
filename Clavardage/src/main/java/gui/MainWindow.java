@@ -192,11 +192,13 @@ public class MainWindow extends JFrame {
 
         aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Tahoma");
         aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-
-        int len = textPane.getDocument().getLength();
+		textPane.setEditable(true);
+		int len = textPane.getDocument().getLength();
         textPane.setCaretPosition(len);
         textPane.setCharacterAttributes(aset, false);
         textPane.replaceSelection(msg);
+        textPane.setEditable(false);
+        
     }
 	
 	/**

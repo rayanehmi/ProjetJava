@@ -246,7 +246,7 @@ public class Agent {
 		
 		//Lancement de l'ecoute des broadcasts
 		System.out.println("Lancement du server UDP sur ecoute");
-		ThreadManager UDP_Listener = new ThreadManager(newEntryFlag);
+		ThreadManager UDP_Listener = new ThreadManager(mainWindow);
 		UDP_Listener.UDP_Server(pseudonyme, IP);
 		
 		
@@ -270,10 +270,9 @@ public class Agent {
 			try {Thread.sleep(200);} 
 			catch (InterruptedException e) {e.printStackTrace();}
 			//System.out.println(UDP_Listener.newEntryFlag);
-			if (mainWindow.refreshFlag||UDP_Listener.newEntryFlag) {
+			if (mainWindow.refreshFlag) {
 				System.out.println("Demande de rafraichissement...");
 				mainWindow.refreshFlag=false;
-				UDP_Listener.newEntryFlag=false;
 				refreshConnectedList();
 			}
 			if (mainWindow.pseudoChoisi != pseudoSelectionne ) {

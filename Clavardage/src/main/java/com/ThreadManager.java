@@ -12,7 +12,7 @@ public class ThreadManager {
 	public String pseudo;
     public InetAddress IP;
     public ArrayList<String> listResponseThreadManager;
-    public boolean newEntryFlag;
+    public MainWindow mainWindow;
     
     public ThreadManager(String pseudo, InetAddress IP) {
     	this.pseudo = pseudo;
@@ -22,8 +22,8 @@ public class ThreadManager {
     public ThreadManager() {
     }	
     
-    public ThreadManager(boolean newEntryFlag) {
-    	this.newEntryFlag= newEntryFlag;
+    public ThreadManager(MainWindow mainWindow) {
+    	this.mainWindow = mainWindow;
     }		
 	
 	/**
@@ -79,7 +79,7 @@ public class ThreadManager {
      */
 	public void UDP_Server(String pseudo,InetAddress IP) {
 		
-		Runnable listen = new UDP_Listener(pseudo,IP,newEntryFlag);
+		Runnable listen = new UDP_Listener(pseudo,IP,mainWindow);
 		Thread thread = new Thread(listen);
 		thread.start();
 		

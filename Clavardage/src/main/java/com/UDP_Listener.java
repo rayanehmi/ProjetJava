@@ -6,18 +6,20 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 
+import gui.MainWindow;
+
 
 class UDP_Listener implements Runnable {
 	
 	private InetAddress IP;
 	private String pseudo;
     private DatagramSocket dgramSocket;
-    public boolean newEntryFlag;
+    public MainWindow mainWindow;
 
-    public UDP_Listener(String pseudo, InetAddress IP, boolean newEntryFlag) {
+    public UDP_Listener(String pseudo, InetAddress IP, MainWindow mainWindow) {
         this.IP = IP;
         this.pseudo = pseudo;
-        this.newEntryFlag=newEntryFlag;
+        this.mainWindow = mainWindow;
     }
 
 
@@ -56,7 +58,7 @@ class UDP_Listener implements Runnable {
     			
     			if (msgRecu[0].equals("/askingConnexion")) {
     				String response = "/firstConnexion_"+IP+"_"+pseudo;
-    				newEntryFlag=true;
+    				mainWindow.refreshFlag = true;
     				DatagramPacket outPacket = new DatagramPacket(response.getBytes(), response.length(),
     				clientAddress, 10001);
     		
