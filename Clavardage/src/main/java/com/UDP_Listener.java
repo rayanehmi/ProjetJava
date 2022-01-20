@@ -17,22 +17,16 @@ class UDP_Listener implements Runnable {
     private DatagramSocket dgramSocket;
     public MainWindow mainWindow;
 
-    public UDP_Listener(String pseudo, InetAddress IP, MainWindow mainWindow) {
+    public UDP_Listener(String pseudo, InetAddress IP, MainWindow mainWindow, DatagramSocket dgramSocket) {
         this.IP = IP;
         this.pseudo = pseudo;
         this.mainWindow = mainWindow;
+        this.dgramSocket = dgramSocket;
     }
 
 
 	
 	public void run() {
-
-		try {
-			dgramSocket = new DatagramSocket(10001);
-		} catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		while(true) {
 		

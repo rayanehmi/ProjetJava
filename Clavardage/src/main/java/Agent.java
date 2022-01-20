@@ -247,7 +247,7 @@ public class Agent {
 		//Lancement de l'ecoute des broadcasts
 		System.out.println("Lancement du server UDP sur ecoute");
 		ThreadManager UDP_Listener = new ThreadManager(mainWindow);
-		UDP_Listener.UDP_Server(pseudonyme, IP);
+		UDP_Listener.UDP_Server(pseudonyme, IP,mainWindow);
 		
 		
 		//Connexion a la database

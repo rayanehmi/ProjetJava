@@ -77,9 +77,9 @@ public class ThreadManager {
      * Ecoute les broadcasts.
      * Renvoie /firstConnexion + pseudo + IP
      */
-	public void UDP_Server(String pseudo,InetAddress IP) {
+	public void UDP_Server(String pseudo,InetAddress IP,MainWindow mainWindow) {
 		
-		Runnable listen = new UDP_Listener(pseudo,IP,mainWindow);
+		Runnable listen = new Thread_UDP_Listener(pseudo,IP,mainWindow);
 		Thread thread = new Thread(listen);
 		thread.start();
 		
