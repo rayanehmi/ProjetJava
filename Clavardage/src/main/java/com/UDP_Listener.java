@@ -87,8 +87,8 @@ class UDP_Listener implements Runnable {
     			
     			else if (msgRecu[0].equals("/over")) {
     				
-    				mainWindow.appendToTabbedPane(msgRecu[1], msgRecu[1]+" s'est deconnecte.", Color.gray);
-    				
+    				System.out.println("MESSAGE DE FIN : "+msgRecu[1]);
+    				    				
 				}
     		}
 	

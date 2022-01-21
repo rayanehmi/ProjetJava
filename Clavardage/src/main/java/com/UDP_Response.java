@@ -32,7 +32,7 @@ class UDP_Response implements Runnable {
 
 		try {
 			dgramSocket = new DatagramSocket(port);
-			dgramSocket.setSoTimeout(2000);
+			dgramSocket.setSoTimeout(1000);
 		} catch (SocketException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

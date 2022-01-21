@@ -266,9 +266,18 @@ public class Agent {
 		ThreadManager TCP_TM = new ThreadManager(pseudonyme, IP);
 		TCP_TM.TCP_Server(mainWindow);	
 		
+		int i = 0;
+		
 		while(true) {
 			try {Thread.sleep(200);} 
 			catch (InterruptedException e) {e.printStackTrace();}
+			i++;
+			if(i>=50) {
+				mainWindow.refreshFlag=false;
+				refreshConnectedList();
+				i = 0;
+			}
+			
 			//System.out.println(UDP_Listener.newEntryFlag);
 			if (mainWindow.refreshFlag) {
 				System.out.println("Demande de rafraichissement...");
