@@ -186,9 +186,6 @@ public class Agent {
 	 */
 	public static void welcomePage() throws Exception{
 		
-		Popup popupTest = new Popup("Test");
-		popupTest.setAlwaysOnTop(true);
-		popupTest.setVisible(true);
 		
 		//Creation de l'interface de bienvenue
 		welcomePage = new Welcome();
@@ -256,10 +253,6 @@ public class Agent {
 		
 		//Connexion a la database
 		
-		
-		//Temporaire : ajoute des faux pseudos connectes
-		listePseudos.add("PseudoTest1");
-		listePseudos.add("PseudoTest2");
 		
 		//Lancement de l'interface principale
 		mainWindow = new MainWindow(pseudonyme,listePseudos);

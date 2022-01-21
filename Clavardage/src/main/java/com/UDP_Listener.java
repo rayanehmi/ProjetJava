@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 
 import gui.MainWindow;
+import gui.PopupManager;
 
 
 class UDP_Listener implements Runnable {
@@ -87,7 +88,9 @@ class UDP_Listener implements Runnable {
     			
     			else if (msgRecu[0].equals("/over")) {
     				
-    				System.out.println("MESSAGE DE FIN : "+msgRecu[1]);
+    				PopupManager popupManager = new PopupManager(msgRecu[1]);
+    				Thread thread = new Thread(popupManager);
+    				thread.start();
     				    				
 				}
     		}
