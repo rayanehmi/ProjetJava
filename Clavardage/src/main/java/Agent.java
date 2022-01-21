@@ -186,6 +186,10 @@ public class Agent {
 	 */
 	public static void welcomePage() throws Exception{
 		
+		Popup popupTest = new Popup("Test");
+		popupTest.setAlwaysOnTop(true);
+		popupTest.setVisible(true);
+		
 		//Creation de l'interface de bienvenue
 		welcomePage = new Welcome();
 		welcomePage.setVisible(true);	
