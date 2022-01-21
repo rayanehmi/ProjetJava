@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -114,7 +115,7 @@ public class MainWindow extends JFrame {
 		btnNewButton_1.setBounds(11, 464, 85, 21);
 		contentPane.add(btnNewButton_1);
 		
-		JTextArea textAreaMessage = new JTextArea();
+		JTextField textAreaMessage = new JTextField();
 		textAreaMessage.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

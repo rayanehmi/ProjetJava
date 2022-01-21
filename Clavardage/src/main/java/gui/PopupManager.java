@@ -10,7 +10,7 @@ public class PopupManager implements Runnable {
 		Popup popup = new Popup(pseudo);
 		popup.setAlwaysOnTop(true);
 		popup.setVisible(true);
-		try { Thread.sleep(500); }
+		try { Thread.sleep(2000); }
 		catch (Exception e) {};
 		popup.dispose();
 	}

@@ -40,7 +40,7 @@ public class TCP_Client {
 		
 		try {
 			ClientSocket = new Socket(this.IPDest,port);
-			System.out.println("debugCConnect");
+			mainWindow.feedback.setText("Connecte a "+pseudoDest);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

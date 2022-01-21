@@ -50,14 +50,10 @@ public class TCP_Server implements Runnable {
         	while(!msg.equals("/over")) 
         	{
         		msg=in.readLine();
-        		System.out.println(msg);
-        		
-            	String[] msgRecu = msg.split("_");
-            	System.out.println(pseudoDest);
             	
-        		
 	        		while(msg!=null)  
 	            	{
+	        			String[] msgRecu = msg.split("_");
 	    				System.out.println("[MESSAGE RECU " + this.pseudoDest + "] : " + msg);
 	    				msgRecu = msg.split("_");
 	    				// envoyer les messages vers l'interface

@@ -43,6 +43,7 @@ public class Popup extends JFrame {
 		txtpnSestDeconnecte.setBounds(10, 11, 357, 77);
 		txtpnSestDeconnecte.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtpnSestDeconnecte.setText(pseudo+" s'est deconnecte.");
+		txtpnSestDeconnecte.setEditable(false);
 		contentPane.add(txtpnSestDeconnecte);
 		
 	}
