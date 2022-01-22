@@ -4,8 +4,9 @@ package db;
 import java.sql.*;
 import java.util.ArrayList;
 
-class DatabaseManager {
-	public static Connection conn;
+public class DatabaseManager {
+	public Connection conn;
+	@SuppressWarnings({ "rawtypes", "deprecation" })
 	public DatabaseManager() {
 			
 		/*
@@ -50,7 +51,7 @@ class DatabaseManager {
 	 * @param conn
 	 * @return
 	 */
-	public static boolean existsInDatabase(String pseudo) {
+	public boolean existsInDatabase(String pseudo) {
 		ResultSet rs;
 		String query = "SELECT COUNT(pseudo) AS Total FROM User WHERE pseudo=\""+pseudo+"\";";
 		System.out.println(query);
@@ -70,7 +71,8 @@ class DatabaseManager {
 	 * @param pseudo
 	 * @param conn
 	 */
-	public static void addInDatabase(String pseudo) {
+	@SuppressWarnings("unused")
+	public void addInDatabase(String pseudo) {
 		String query = "INSERT INTO User VALUES (\""+pseudo+"\";";
 		System.out.println(query);
 		try (Statement stmt = conn.createStatement()) {
@@ -84,7 +86,7 @@ class DatabaseManager {
 	 * @param pseudo
 	 * @param conn
 	 */
-	public static void registerIfDoesntExist (String pseudo) {
+	public void registerIfDoesntExist (String pseudo) {
 		if (!existsInDatabase(pseudo)) {
 			addInDatabase(pseudo);
 		}
@@ -97,7 +99,7 @@ class DatabaseManager {
 	 * @param pseudoDest
 	 * @param conn
 	 */
-	public static void messageToDatabase(String message, String pseudo, String pseudoDest) {
+	public void messageToDatabase(String message, String pseudo, String pseudoDest) {
 
 		
 	    long millis=System.currentTimeMillis();  
@@ -121,7 +123,7 @@ class DatabaseManager {
 	 * Le format d'un message est : pseudo_contenu_date.
 	 * @return
 	 */
-	public static ArrayList<String> getMessagesFromDatabase(String pseudo, String pseudoDest){
+	public ArrayList<String> getMessagesFromDatabase(String pseudo, String pseudoDest){
 		ArrayList<String> listeMessages = new ArrayList<String>();
 		String query = "SELECT msg, pseudo, date FROM Message WHERE ((pseudo=\""+pseudo+"\" AND pseudoDest=\""
 				+pseudoDest+"\") OR (pseudo=\""+pseudoDest+"\" AND pseudoDest=\""+pseudo

@@ -1,5 +1,7 @@
 package com;
+import db.DatabaseManager;
 import java.net.*;
+import java.sql.Timestamp;
 import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
@@ -35,7 +37,6 @@ public class TCP_Client {
 		Socket ClientSocket = null;
 		PrintWriter out = null;
 		
-		
 		try {
 			ClientSocket = new Socket(this.IPDest,port);
 			mainWindow.feedback.setText("Connecte a "+pseudoDest);
@@ -52,6 +53,31 @@ public class TCP_Client {
 		}
 
 		
+		// database
+		DatabaseManager dbManager = new DatabaseManager();
+		ArrayList<String> listeMessages = dbManager.getMessagesFromDatabase(pseudo, pseudoDest);
+		
+		//Affichage de l'historique
+		for (String message : listeMessages) {
+			
+			String[] messageDecoupe = message.split("_");
+			String jour = messageDecoupe[2].substring(0,10);
+			String heure = messageDecoupe[2].substring(11,16);
+			
+			//Si l'envoyeur est nous
+			if (messageDecoupe[0]==pseudo) {
+				mainWindow.appendToTabbedPane(pseudoDest, "Le "+jour+" a "+heure+", ",Color.gray);
+				mainWindow.appendToTabbedPane(pseudoDest,pseudo + " a dit : ",Color.blue);
+				mainWindow.appendToTabbedPane(pseudoDest,messageDecoupe[1]+"\n",Color.black);
+			}
+			//Si l'envoyeur est le collegue
+			else if (messageDecoupe[0]==pseudoDest) {
+				mainWindow.appendToTabbedPane(pseudoDest, "Le "+jour+" a "+heure+", ",Color.gray);
+				mainWindow.appendToTabbedPane(pseudoDest,pseudoDest + " a dit : ",Color.blue);
+				mainWindow.appendToTabbedPane(pseudoDest,messageDecoupe[1]+"\n",Color.black);
+			}
+		}
+		
 		String msg ="";
 			while (!msg.equals("/over"))
 				{
@@ -63,10 +89,14 @@ public class TCP_Client {
 					if (!msg.equals("")) {
 						listeMessages.add(pseudo+"_"+msg);
 						out.println(pseudo+"_"+msg);
-						mainWindow.appendToTabbedPane(pseudoDest,pseudo + " said : ",Color.blue); //pseudo collegue 
+						String timeStamp = new Timestamp(System.currentTimeMillis()).toString();
+						String jour = timeStamp.substring(0,10);
+						String heure = timeStamp.substring(11,16);
+						mainWindow.appendToTabbedPane(pseudoDest, "Le "+jour+" a "+heure+", ",Color.gray);
+						mainWindow.appendToTabbedPane(pseudoDest,pseudo + " a dit : ",Color.blue); //pseudo collegue 
 						mainWindow.appendToTabbedPane(pseudoDest,msg+"\n",Color.black); //contenu
-						System.out.println("[MESSAGE ENVOYE PAR " + this.pseudo + "] : " + msg);
 						out.flush();
+						dbManager.messageToDatabase(msg,pseudo,pseudoDest); //ajoute le message a la database
 						mainWindow.messageToSend="";
 					}
 				

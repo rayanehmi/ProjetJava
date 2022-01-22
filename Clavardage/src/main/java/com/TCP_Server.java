@@ -6,7 +6,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.sql.Timestamp;
 
+import db.DatabaseManager;
 import gui.MainWindow;
 
 public class TCP_Server implements Runnable {
@@ -39,7 +41,6 @@ public class TCP_Server implements Runnable {
 
         	String msg="";
         	DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-        	        	
         	while(!msg.equals("/over")) 
         	{
         		msg=in.readLine();
@@ -49,11 +50,14 @@ public class TCP_Server implements Runnable {
 	        			String[] msgRecu = msg.split("_");
 	    				System.out.println("[MESSAGE RECU " + this.pseudoDest + "] : " + msg);
 	    				msgRecu = msg.split("_");
+	    				
 	    				// envoyer les messages vers l'interface
-	    				mainWindow.appendToTabbedPane(msgRecu[0],msgRecu[0] + " said : ",Color.red); //pseudo collegue 
-						mainWindow.appendToTabbedPane(msgRecu[0],msgRecu[1]+"\n",Color.black); //contenu
-						
-	    				// envoyer les messages vers la DataBase
+	    				String timeStamp = new Timestamp(System.currentTimeMillis()).toString();
+						String jour = timeStamp.substring(0,10);
+						String heure = timeStamp.substring(11,16);
+						mainWindow.appendToTabbedPane(msgRecu[0], "Le "+jour+" a "+heure+", ",Color.gray);
+						mainWindow.appendToTabbedPane(msgRecu[0],msgRecu[0] + " a dit : ",Color.blue); //pseudo collegue 
+						mainWindow.appendToTabbedPane(msgRecu[0],msg+"\n",Color.black); //contenu
 						
 	    		        outputStream.writeUTF(msg);
 	    		        outputStream.flush();
