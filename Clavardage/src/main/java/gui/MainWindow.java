@@ -20,8 +20,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.UIManager;
 import javax.swing.JTextPane;
 import javax.swing.JTabbedPane;
@@ -51,6 +49,7 @@ public class MainWindow extends JFrame {
 	 * Create the frame.
 	 */
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindow(String pseudo, ArrayList<String> arrayCo) {
 		
 		addWindowListener(new java.awt.event.WindowAdapter() {

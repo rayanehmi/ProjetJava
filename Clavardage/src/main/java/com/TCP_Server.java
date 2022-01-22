@@ -24,7 +24,6 @@ public class TCP_Server implements Runnable {
         try {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -37,15 +36,9 @@ public class TCP_Server implements Runnable {
 
     public void run() {
         try {
-        	//Ouvrir interface
-        	
-    		//Messaging messaging = new Messaging();
-    		//messaging.frame.setVisible(true);
-    		
+
         	String msg="";
-        	//System.out.println("debugT1");
         	DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-        	System.out.println("debugT2");
         	        	
         	while(!msg.equals("/over")) 
         	{

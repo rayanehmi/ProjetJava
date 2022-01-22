@@ -1,15 +1,9 @@
 package com;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
@@ -34,7 +28,7 @@ class UDP_Response implements Runnable {
 			dgramSocket = new DatagramSocket(port);
 			dgramSocket.setSoTimeout(1000);
 		} catch (SocketException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 
@@ -67,7 +61,6 @@ class UDP_Response implements Runnable {
 			
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Fin de l'ecoute");
 			dgramSocket.close();
 		}

@@ -3,8 +3,6 @@ import java.net.*;
 import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import gui.MainWindow;
 
 public class TCP_Client {
@@ -42,17 +40,14 @@ public class TCP_Client {
 			ClientSocket = new Socket(this.IPDest,port);
 			mainWindow.feedback.setText("Connecte a "+pseudoDest);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		try {
 			out = new PrintWriter(ClientSocket.getOutputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -82,7 +77,6 @@ public class TCP_Client {
 			ClientSocket.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

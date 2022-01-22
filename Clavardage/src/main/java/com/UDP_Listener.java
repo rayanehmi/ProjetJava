@@ -1,12 +1,9 @@
 package com;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-
 import gui.MainWindow;
 import gui.PopupManager;
 
@@ -40,11 +37,11 @@ class UDP_Listener implements Runnable {
 			try {
 				dgramSocket.receive(inPacket);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			InetAddress clientAddress = inPacket.getAddress();
+			@SuppressWarnings("unused")
 			int clientPort = inPacket.getPort();
 	
 			String message = new String(inPacket.getData(), 0, inPacket.getLength());
@@ -63,7 +60,6 @@ class UDP_Listener implements Runnable {
     					catch(InterruptedException e) {e.printStackTrace();}
 						dgramSocket.send(outPacket);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
     				
@@ -80,7 +76,6 @@ class UDP_Listener implements Runnable {
     					catch(InterruptedException e) {e.printStackTrace();}
 						dgramSocket.send(outPacket);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
     				

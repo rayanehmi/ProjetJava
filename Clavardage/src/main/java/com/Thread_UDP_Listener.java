@@ -1,10 +1,7 @@
 package com;
 
-import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,7 +25,6 @@ public class Thread_UDP_Listener implements Runnable {
 		try {
 			dgramSocket = new DatagramSocket(10001);
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

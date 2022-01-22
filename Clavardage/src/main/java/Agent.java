@@ -9,8 +9,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import javax.swing.JList;
-
 //Fichiers du projet
 import com.*;
 import gui.*;

@@ -1,18 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.eclipse.swt.graphics.Image;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.Color;
 
 public class Popup extends JFrame {
