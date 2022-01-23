@@ -55,6 +55,8 @@ public class TCP_Client {
 		
 		// database
 		DatabaseManager dbManager = new DatabaseManager();
+		dbManager.registerIfDoesntExist(pseudo);
+		dbManager.registerIfDoesntExist(pseudoDest); //peut etre inutile
 		ArrayList<String> listeMessages = dbManager.getMessagesFromDatabase(pseudo, pseudoDest);
 		
 		//Affichage de l'historique
@@ -77,6 +79,8 @@ public class TCP_Client {
 				mainWindow.appendToTabbedPane(pseudoDest,messageDecoupe[1]+"\n",Color.black);
 			}
 		}
+		
+		// Partie comm
 		
 		String msg ="";
 			while (!msg.equals("/over"))
