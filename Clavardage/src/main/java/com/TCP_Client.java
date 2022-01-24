@@ -57,23 +57,24 @@ public class TCP_Client {
 		DatabaseManager dbManager = new DatabaseManager();
 		dbManager.registerIfDoesntExist(pseudo);
 		dbManager.registerIfDoesntExist(pseudoDest); //peut etre inutile
+		mainWindow.addTabToPane(pseudoDest);
 		ArrayList<String> listeMessages = dbManager.getMessagesFromDatabase(pseudo, pseudoDest);
 		
 		//Affichage de l'historique
 		for (String message : listeMessages) {
-			
+			//System.out.println(message);
 			String[] messageDecoupe = message.split("_");
 			String jour = messageDecoupe[2].substring(0,10);
 			String heure = messageDecoupe[2].substring(11,16);
 			
 			//Si l'envoyeur est nous
-			if (messageDecoupe[0]==pseudo) {
+			if (messageDecoupe[0].equals(pseudo)) {
 				mainWindow.appendToTabbedPane(pseudoDest, "Le "+jour+" a "+heure+", ",Color.gray);
-				mainWindow.appendToTabbedPane(pseudoDest,pseudo + " a dit : ",Color.blue);
+				mainWindow.appendToTabbedPane(pseudoDest,pseudo + " a dit : ",Color.red);
 				mainWindow.appendToTabbedPane(pseudoDest,messageDecoupe[1]+"\n",Color.black);
 			}
 			//Si l'envoyeur est le collegue
-			else if (messageDecoupe[0]==pseudoDest) {
+			else if (messageDecoupe[0].equals(pseudoDest)) {
 				mainWindow.appendToTabbedPane(pseudoDest, "Le "+jour+" a "+heure+", ",Color.gray);
 				mainWindow.appendToTabbedPane(pseudoDest,pseudoDest + " a dit : ",Color.blue);
 				mainWindow.appendToTabbedPane(pseudoDest,messageDecoupe[1]+"\n",Color.black);
@@ -97,7 +98,7 @@ public class TCP_Client {
 						String jour = timeStamp.substring(0,10);
 						String heure = timeStamp.substring(11,16);
 						mainWindow.appendToTabbedPane(pseudoDest, "Le "+jour+" a "+heure+", ",Color.gray);
-						mainWindow.appendToTabbedPane(pseudoDest,pseudo + " a dit : ",Color.blue); //pseudo collegue 
+						mainWindow.appendToTabbedPane(pseudoDest,pseudo + " a dit : ",Color.red); //pseudo collegue 
 						mainWindow.appendToTabbedPane(pseudoDest,msg+"\n",Color.black); //contenu
 						out.flush();
 						dbManager.messageToDatabase(msg,pseudo,pseudoDest); //ajoute le message a la database

@@ -57,7 +57,7 @@ public class TCP_Server implements Runnable {
 						String heure = timeStamp.substring(11,16);
 						mainWindow.appendToTabbedPane(msgRecu[0], "Le "+jour+" a "+heure+", ",Color.gray);
 						mainWindow.appendToTabbedPane(msgRecu[0],msgRecu[0] + " a dit : ",Color.blue); //pseudo collegue 
-						mainWindow.appendToTabbedPane(msgRecu[0],msg+"\n",Color.black); //contenu
+						mainWindow.appendToTabbedPane(msgRecu[0],msgRecu[1]+"\n",Color.black); //contenu
 						
 	    		        outputStream.writeUTF(msg);
 	    		        outputStream.flush();

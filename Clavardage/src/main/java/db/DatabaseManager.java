@@ -11,7 +11,7 @@ public class DatabaseManager {
 			
 		/*
 		 * tables : Message, 
-		 * mysql -h srv-bdens.insa-toulouse.fr –P 3306 –u tp_servlet_014 –p bieNee0i
+		 * mysql -h srv-bdens.insa-toulouse.fr -P 3306 -u tp_servlet_014 -p bieNee0i
 		 * (use tp_servlet_014)
 		 * select count(pseudo) as total from User where pseudo="pseudo";
 		 * insert into User values ("pseudo");
@@ -73,7 +73,7 @@ public class DatabaseManager {
 	 */
 	@SuppressWarnings("unused")
 	public void addInDatabase(String pseudo) {
-		String query = "INSERT INTO User VALUES (\""+pseudo+"\";";
+		String query = "INSERT INTO User VALUES (\""+pseudo+"\");";
 		System.out.println(query);
 		try (Statement stmt = conn.createStatement()) {
 			int rs = stmt.executeUpdate(query);
