@@ -114,7 +114,7 @@ public class MainWindow extends JFrame {
 		btnNewButton_1.setBounds(11, 464, 85, 21);
 		contentPane.add(btnNewButton_1);
 		
-		JTextField textAreaMessage = new JTextField();
+		final JTextField textAreaMessage = new JTextField();
 		textAreaMessage.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

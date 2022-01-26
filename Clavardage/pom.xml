@@ -5,7 +5,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Clavardage</name>
   <description>Projet de clavardage POO</description>
-  
+   <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
   <dependencies>
   	
   	<dependency>

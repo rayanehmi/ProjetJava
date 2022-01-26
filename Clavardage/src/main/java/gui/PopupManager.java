@@ -5,7 +5,6 @@ public class PopupManager implements Runnable {
 	public PopupManager(String pseudo) {
 		this.pseudo=pseudo;
 	}
-	@Override
 	public void run() {
 		Popup popup = new Popup(pseudo);
 		popup.setAlwaysOnTop(true);
